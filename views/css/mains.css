@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: 0;
+          box-sizing: 0;
+}
+
+html,
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+header {
+  background-image: url(https://product.hstatic.net/1000353777/product/upload_4a24e77b3c3e41c3974b03182fea0e5a.jpg);
+  height: 450px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 20px;
+}
+
+.products .row .card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+  border: 0;
+  border-radius: 10px;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.products .row .card:hover {
+  -webkit-box-shadow: 2px 15px 25px 0px #8b8a8a;
+          box-shadow: 2px 15px 25px 0px #8b8a8a;
+}
+
+.products .row .card .img-card {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 350px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.products .row .card .img-card img {
+  border-radius: 10px 10px 0 0;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.products .row .card .img-card img:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.products .row .card .card-body {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+
+.products .row .card .card-body h1 {
+  font-size: 11px;
+  color: palevioletred;
+  font-weight: 600;
+}
+
+.products .row .card .card-body h5 {
+  font-size: 23px;
+  color: black;
+  font-weight: 700;
+}
+
+.products .row .card .card-body p {
+  font-size: 15px;
+  color: #222020;
+  font-weight: 400;
+}
+
+.products .row .card-hover {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+  -webkit-transition: all .5s;
+  transition: all .5s;
+}
+
+.products .row .col-4 {
+  overflow: hidden;
+  position: relative;
+}
+
+.products .row .col-4:hover .card-hover {
+  -webkit-transform: translateY(-20px);
+          transform: translateY(-20px);
+}
+/*# sourceMappingURL=mains.css.map */
