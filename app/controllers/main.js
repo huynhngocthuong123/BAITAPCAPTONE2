@@ -1,5 +1,5 @@
 const services = new DanhSachSanPham();
-function getProductList() {
+let getProductList = () => {
   const promise = services.getList();
   promise.then((resutl) => {
     // console.log(resutl.data);
@@ -10,7 +10,7 @@ function getProductList() {
   });
 }
 getProductList();
-function HienThiSP(mangSP) {
+let HienThiSP = (mangSP) => {
   let content = "";
   mangSP.map(function (sp) {
     content += `
@@ -29,7 +29,7 @@ function HienThiSP(mangSP) {
         </div>
         <div class="card-hover d-flex justify-content-around">
         <button class="btn btn-info">chi tiết</button>
-        <button class="btn btn-danger">xóa</button>
+        <button onclick="deleteProduct('${sp.id}')" class="btn btn-danger">xóa</button>
       </div>
       </div>`;
   });
@@ -38,7 +38,7 @@ function HienThiSP(mangSP) {
 const ELE = (id) => {
   return document.querySelector(id);
 };
-function themSP() {
+let themSP = () =>        {
   let ten = ELE("#TenSP").value;
   let loai = ELE("#loai").value;
   let gia = ELE("#GiaSP").value;
@@ -61,3 +61,11 @@ ELE("#btnThemMoiSP").addEventListener("click", function () {
     "#myModal .modal-footer"
   ).innerHTML = `<button onclick="themSP()">thêm</button>`;
 });
+let deleteProduct = (id) =>{
+  const promise = services.delete(id)
+  promise.then((result) => { 
+    getProductList();
+   }).catch((error) => { 
+     console.log(error);
+    })
+}

@@ -5,7 +5,6 @@ function DanhSachSanPham() {
       url: "https://62a432fd259aba8e10e3e9e9.mockapi.io/sanPham",
     });
   };
-  //chưa truyển sp vào nè
   this.post = (sp) => {
     return axios({
       method: "post",
@@ -13,4 +12,10 @@ function DanhSachSanPham() {
       data: sp,
     });
   };
+  this.delete = (id) => {
+    return axios({
+      method: "delete",
+      url: `https://62a432fd259aba8e10e3e9e9.mockapi.io/sanPham/${id}`,
+    });
+  }
 }
