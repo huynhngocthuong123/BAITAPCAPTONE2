@@ -1,3 +1,6 @@
+import SanPham from "../models/SanPham.js";
+import DanhSachSanPham from "../services/SanPhamList.js";
+
 const services = new DanhSachSanPham();
 let getProductList = () => {
   const promise = services.getList();
@@ -38,7 +41,7 @@ let HienThiSP = (mangSP) => {
 const ELE = (id) => {
   return document.querySelector(id);
 };
-let themSP = () =>        {
+let themSP = () => {
   let ten = ELE("#TenSP").value;
   let loai = ELE("#loai").value;
   let gia = ELE("#GiaSP").value;
@@ -69,3 +72,16 @@ let deleteProduct = (id) =>{
      console.log(error);
     })
 }
+
+let ChangeTypePhone = () => {
+  let typePhone = document.querySelector("#chonthuonghieu").value;
+  console.log(typePhone)
+  // if() {
+
+  // }
+  // else {
+
+  // }
+}
+
+

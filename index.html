@@ -71,7 +71,7 @@
               </button>
             </div>
             <div class="col-md-4">
-              <select class="btn btn-info" id="chonthuonghieu">
+              <select class="btn btn-info" id="chonthuonghieu" onchange ="ChangeTypePhone()">
                 <option value="">---Thương Hiệu Sản Phẩm---</option>
                 <option value="">Iphone</option>
                 <option value="">SamSung</option>
@@ -213,8 +213,6 @@
     ></script>
     <!-- aixos -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./app/models/Sanpham.js"></script>
-    <script src="./app/services/SanPhamList.js"></script>
-    <script src="./app/controllers/main.js"></script>
+    <script type="module" src="./app/controllers/main.js"></script>
   </body>
 </html>
