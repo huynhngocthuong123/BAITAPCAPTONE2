@@ -2,16 +2,19 @@ import SanPham from "../models/SanPham.js";
 import DanhSachSanPham from "../services/SanPhamList.js";
 
 const services = new DanhSachSanPham();
+let arrPhone = [];
 let getProductList = () => {
   const promise = services.getList();
   promise.then((resutl) => {
-    // console.log(resutl.data);
-    HienThiSP(resutl.data);
+    // console.log(resutl)
+    arrPhone = resutl.data;
+    HienThiSP(arrPhone);
   });
   promise.catch((error) => {
     console.log(error);
   });
-}
+};
+
 getProductList();
 let HienThiSP = (mangSP) => {
   let content = "";
@@ -37,7 +40,7 @@ let HienThiSP = (mangSP) => {
       </div>`;
   });
   document.getElementById("bodySP").innerHTML = content;
-}
+};
 const ELE = (id) => {
   return document.querySelector(id);
 };
@@ -58,30 +61,50 @@ let themSP = () => {
   promise.catch((error) => {
     console.log(error);
   });
-}
+};
 ELE("#btnThemMoiSP").addEventListener("click", function () {
   ELE(
     "#myModal .modal-footer"
   ).innerHTML = `<button onclick="themSP()">thêm</button>`;
 });
-let deleteProduct = (id) =>{
-  const promise = services.delete(id)
-  promise.then((result) => { 
-    getProductList();
-   }).catch((error) => { 
-     console.log(error);
+let deleteProduct = (id) => {
+  const promise = services.delete(id);
+  promise
+    .then((result) => {
+      getProductList();
     })
-}
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
-let ChangeTypePhone = () => {
+
+let changeTypePhone = (phones) => {
   let typePhone = document.querySelector("#chonthuonghieu").value;
-  console.log(typePhone)
-  // if() {
+  const samsungTypes = [];
+  const ipphone = [];
+  
+  if(typePhone === 'samsung') {
+    for (let i = 0; i < phones.length; i++) {
+      if (phones[i].loaiSP === typePhone) {
+        samsungTypes.push(phones[i]);
+      }
+    }
+    HienThiSP(samsungTypes)
+  } 
+  else if(typePhone === 'iphone'){
+    for (let i = 0; i < phones.length; i++) {
+      if (phones[i].loaiSP === typePhone) {
+        ipphone.push(phones[i]);
+      }
+    }
+    HienThiSP(ipphone)
+  }else {
+    HienThiSP(arrPhone)
+  }
+  
 
-  // }
-  // else {
-
-  // }
-}
-
-
+};
+ELE("#chonthuonghieu").addEventListener("change", function(){
+  changeTypePhone(arrPhone)
+});

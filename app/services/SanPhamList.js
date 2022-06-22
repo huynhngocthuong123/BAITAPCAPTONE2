@@ -9,7 +9,7 @@ export default class DanhSachSanPham {
     return axios({
       method: "post",
       url: "https://62a432fd259aba8e10e3e9e9.mockapi.io/sanPham",
-      data: sp,
+      data:sp,
     });
   };
   delete(id){
