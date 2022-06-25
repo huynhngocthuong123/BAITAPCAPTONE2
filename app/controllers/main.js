@@ -1,4 +1,3 @@
-
 const services = new DanhSachSanPham();
 let arrPhone = [];
 let getProductList = () => {
@@ -12,7 +11,6 @@ let getProductList = () => {
     console.log(error);
   });
 };
-
 getProductList();
 let HienThiSP = (mangSP) => {
   let content = "";
@@ -32,10 +30,7 @@ let HienThiSP = (mangSP) => {
           </div>
         </div>
         <div class="card-hover d-flex justify-content-around">
-
-        <button id="themgiohang" class="btn btn-success">Thêm giỏ hàng</button>
-
-        <button id="xemchitiet" class="btn btn-info" data-toggle="modal" data-target="#myModal"
+        <button class="btn btn-info xemchitiet" data-toggle="modal" data-target="#myModal"
         onclick = "xemChiTiet('${sp.id}')">chi tiết</button>
         
         <button onclick="deleteProduct('${sp.id}')" class="btn btn-danger">xóa</button>
@@ -68,7 +63,7 @@ let themSP = () => {
 ELE("#btnThemMoiSP").addEventListener("click", function () {
   ELE(
     "#myModal .modal-footer"
-  ).innerHTML = `<button class="btn btn-success" onclick="themSP()">thêm</button>`;
+  ).innerHTML = `<button class="btn btn-success ml-auto" onclick="themSP()">thêm</button>`;
 });
 let deleteProduct = (id) => {
   const promise = services.delete(id);
@@ -86,36 +81,32 @@ let changeTypePhone = (phones) => {
   let typePhone = document.querySelector("#chonthuonghieu").value;
   const samsungTypes = [];
   const ipphone = [];
-  
-  if(typePhone === 'samsung') {
+
+  if (typePhone === "samsung") {
     for (let i = 0; i < phones.length; i++) {
       if (phones[i].loaiSP === typePhone) {
         samsungTypes.push(phones[i]);
       }
     }
-    HienThiSP(samsungTypes)
-  } 
-  else if(typePhone === 'iphone'){
+    HienThiSP(samsungTypes);
+  } else if (typePhone === "iphone") {
     for (let i = 0; i < phones.length; i++) {
       if (phones[i].loaiSP === typePhone) {
         ipphone.push(phones[i]);
       }
     }
-    HienThiSP(ipphone)
-  }else {
-    HienThiSP(arrPhone)
+    HienThiSP(ipphone);
+  } else {
+    HienThiSP(arrPhone);
   }
-  
-
 };
 // vì link script ở file html dùng type = module nên phải xử lý ở js
-ELE("#chonthuonghieu").addEventListener("change", () =>{
-  changeTypePhone(arrPhone)
+ELE("#chonthuonghieu").addEventListener("change", () => {
+  changeTypePhone(arrPhone);
 });
 
-
 let xemChiTiet = (id) => {
-  console.log(id)
+  console.log(id);
   const promise = services.getProductItem(id);
 
   promise.then((result) => {
@@ -127,5 +118,8 @@ let xemChiTiet = (id) => {
     ELE("#dungluongRAM").value = result.data.dungLuongRAM;
     ELE("#HinhSP").value = result.data.anhSP;
     ELE("#MoTa").value = result.data.moTaSP;
-  })
-}
+    ELE("#myModal .modal-footer").innerHTML = `
+    <button id="themgiohang" class="btn btn-success">Thêm giỏ hàng</button>
+    <button id="capnhap" class="btn btn-primary">Cập nhập</button></div>`;
+  });
+};
