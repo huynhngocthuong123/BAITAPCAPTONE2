@@ -119,20 +119,19 @@ let xemChiTiet = (id) => {
     ELE("#HinhSP").value = result.data.anhSP;
     ELE("#MoTa").value = result.data.moTaSP;
     ELE("#myModal .modal-footer").innerHTML = `
-    <button onclick="renderCart('${result.data.tenSP}','${result.data.giaSP}')" id="themgiohang" class="btn btn-success">Thêm giỏ hàng</button>
+    <button onclick="addUICart('${result.data.tenSP}','${result.data.giaSP}')" id="themgiohang" class="btn btn-success">Thêm giỏ hàng</button>
     <button id="capnhap" class="btn btn-primary">Cập nhập</button></div>`;
   });
 };
 // thêm vào giỏ hàng chưa code local storage
 let addCart = [];
-function renderCart(ten, gia) {
+let addUICart = (ten, gia) => {
   addCart.push({
     tenSP: ten,
     giaSP: gia,
   });
   let content = "";
   let stt = 0;
-
   addCart.map(function (sp) {
     content += `
         <tr>
@@ -150,4 +149,4 @@ function renderCart(ten, gia) {
         `;
   });
   document.getElementById("tblDanhGioHang").innerHTML = content;
-}
+};
