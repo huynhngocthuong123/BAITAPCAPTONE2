@@ -1,5 +1,3 @@
-import SanPham from "../models/SanPham.js";
-import DanhSachSanPham from "../services/SanPhamList.js";
 
 const services = new DanhSachSanPham();
 let arrPhone = [];
@@ -34,7 +32,12 @@ let HienThiSP = (mangSP) => {
           </div>
         </div>
         <div class="card-hover d-flex justify-content-around">
-        <button class="btn btn-info">chi tiết</button>
+
+        <button id="themgiohang" class="btn btn-success">Thêm giỏ hàng</button>
+
+        <button id="xemchitiet" class="btn btn-info" data-toggle="modal" data-target="#myModal"
+        onclick = "xemChiTiet('${sp.id}')">chi tiết</button>
+        
         <button onclick="deleteProduct('${sp.id}')" class="btn btn-danger">xóa</button>
       </div>
       </div>`;
@@ -65,7 +68,7 @@ let themSP = () => {
 ELE("#btnThemMoiSP").addEventListener("click", function () {
   ELE(
     "#myModal .modal-footer"
-  ).innerHTML = `<button onclick="themSP()">thêm</button>`;
+  ).innerHTML = `<button class="btn btn-success" onclick="themSP()">thêm</button>`;
 });
 let deleteProduct = (id) => {
   const promise = services.delete(id);
@@ -78,7 +81,7 @@ let deleteProduct = (id) => {
     });
 };
 
-
+// Câu 4 : chọn loại điện thoại
 let changeTypePhone = (phones) => {
   let typePhone = document.querySelector("#chonthuonghieu").value;
   const samsungTypes = [];
@@ -105,6 +108,24 @@ let changeTypePhone = (phones) => {
   
 
 };
-ELE("#chonthuonghieu").addEventListener("change", function(){
+// vì link script ở file html dùng type = module nên phải xử lý ở js
+ELE("#chonthuonghieu").addEventListener("change", () =>{
   changeTypePhone(arrPhone)
 });
+
+
+let xemChiTiet = (id) => {
+  console.log(id)
+  const promise = services.getProductItem(id);
+
+  promise.then((result) => {
+    console.log(result);
+    ELE("#TenSP").value = result.data.tenSP;
+    ELE("#loai").value = result.data.loaiSP;
+    ELE("#GiaSP").value = result.data.giaSP;
+    ELE("#dungluongROM").value = result.data.dungLuongROM;
+    ELE("#dungluongRAM").value = result.data.dungLuongRAM;
+    ELE("#HinhSP").value = result.data.anhSP;
+    ELE("#MoTa").value = result.data.moTaSP;
+  })
+}
