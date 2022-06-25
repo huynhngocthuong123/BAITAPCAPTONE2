@@ -119,7 +119,35 @@ let xemChiTiet = (id) => {
     ELE("#HinhSP").value = result.data.anhSP;
     ELE("#MoTa").value = result.data.moTaSP;
     ELE("#myModal .modal-footer").innerHTML = `
-    <button id="themgiohang" class="btn btn-success">Thêm giỏ hàng</button>
+    <button onclick="renderCart('${result.data.tenSP}','${result.data.giaSP}')" id="themgiohang" class="btn btn-success">Thêm giỏ hàng</button>
     <button id="capnhap" class="btn btn-primary">Cập nhập</button></div>`;
   });
 };
+// thêm vào giỏ hàng chưa code local storage
+let addCart = [];
+function renderCart(ten, gia) {
+  addCart.push({
+    tenSP: ten,
+    giaSP: gia,
+  });
+  let content = "";
+  let stt = 0;
+
+  addCart.map(function (sp) {
+    content += `
+        <tr>
+        <td>${++stt}</td>
+            <td>${sp.tenSP}</td>
+            <td>${sp.giaSP}</td>
+            <td>
+                <input id="abc" style="width: 30px" type="number" value="1" min="0"/>
+            </td>
+            <td>thành tiền</td>
+            <td>
+                <button class="btn btn-danger">Xóa</button>
+            </td>
+        </tr>
+        `;
+  });
+  document.getElementById("tblDanhGioHang").innerHTML = content;
+}
