@@ -1,13 +1,9 @@
-class SanPham {
-    constructor(ten,loai,gia,ROM,RAM,anh,moTa) {
+function SanPham() {
         this.tenSP =  ten;
         this.loaiSP = loai;
         this.giaSP = gia;
-        this.dungLuongROM = ROM; 
-        this.dungLuongRAM = RAM;
+        this.dungLuongROM = dungLuongROM; 
+        this.dungLuongRAM = dungLuongRAM;
         this.anhSP = anh;
         this.moTaSP = moTa;
-    }
 }
-
-export default SanPham
