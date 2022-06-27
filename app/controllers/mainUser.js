@@ -22,21 +22,21 @@ let HienThiSPUser = (mangSP) => {
     contentUser += `
         <div class="col-4 p-3">
         <div class="card">
-          <div class="img-card overflow-hidden">
+          <div class="card-top overflow-hidden">
             <img src="${sp.anhSP}" class="card-img-top img-fluid" alt="..." />
           </div>
-          <div class="card-body">
-            <h1>Tên:<span>${sp.tenSP}</span></h1>
-            <h5>Giá sản phẩm: ${sp.giaSP}</h5>
-            <p>
-              ${sp.moTaSP}
-            </p>
+          <div class="card-bottom">
+            <div class="card-content">
+            <h1><span>${sp.tenSP}</span></h1>
+            <p>${sp.moTaSP}</p>
+            </div>
+          <h5>Giá sản phẩm: ${sp.giaSP}</h5>
           </div>
         </div>
         <div class="card-hover d-flex justify-content-around">
-        <button class="btn btn-info xemchitiet" data-toggle="modal" data-target="#myModal"
-        onclick = "xemChiTiet('${sp.id}')">chi tiết</button>
-        <button onclick="addUICart('${sp.tenSP}','${sp.giaSP}')" class="btn btn-success">Thêm giỏ hàng</button>
+        <button class="buttoncart btn btn-info xemchitiet" data-toggle="modal" data-target="#myModal"
+        onclick = "xemChiTiet('${sp.id}')">Chi tiết</button>
+        <button onclick="addUICart('${sp.tenSP}','${sp.giaSP}')" class="buttoncart btn btn-success">Thêm giỏ hàng</button>
       </div>
       </div>`;
   });

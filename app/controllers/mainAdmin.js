@@ -65,7 +65,7 @@ let themSP = () => {
 ELE("#btnThemMoiSP").addEventListener("click", function () {
   ELE(
     "#myModal .modal-footer"
-  ).innerHTML = `<button class="btn btn-success ml-auto" onclick="themSP()">Thêm</button>`;
+  ).innerHTML = `<button class=" btn btn-success ml-auto px-5" onclick="themSP()">Thêm</button>`;
 });
 // xóa sp
 let deleteProduct = (id) => {
