@@ -27,7 +27,11 @@
     <header></header>
     <section class="container products">
       <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <div
+          class="nav nav-tabs justify-content-between"
+          id="nav-tab"
+          role="tablist"
+        >
           <a
             class="nav-link active"
             id="nav-home-tab"
@@ -37,16 +41,6 @@
             aria-controls="nav-home"
             aria-selected="true"
             >Danh Sách Sản Phẩm</a
-          >
-          <a
-            class="nav-link"
-            id="nav-home-tab1"
-            data-toggle="tab"
-            href="#danhsachgiohang"
-            role="tab"
-            aria-controls="nav-home"
-            aria-selected="true"
-            >Giỏ Hàng</a
           >
         </div>
       </nav>
@@ -59,20 +53,17 @@
           aria-labelledby="nav-home-tab"
         >
           <div class="row">
-            <div class="col-md-4">
-              <button
+            <div class="col-md-4 position-absolute">
+              <p
                 id="btnThemMoiSP"
                 class="btn btn-info"
                 data-toggle="modal"
                 data-target="#myModal"
-              >
-                <i class="fa fa-plus mr-1"></i>
-                Thêm Mới Sản Phẩm
-              </button>
+              ></p>
             </div>
             <div class="col-md-4">
               <select class="btn btn-info" id="chonthuonghieu">
-                <option value="all">Tất cả</option>
+                <option value="all">Lọc theo hãng</option>
                 <option value="iphone">Iphone</option>
                 <option value="samsung">SamSung</option>
               </select>
@@ -95,7 +86,19 @@
               </div>
               <!-- END TÌM KIẾM -->
             </div>
+            <div class="col-md-4 d-flex justify-content-end">
+              <button
+                type="button"
+                class="buttoncart btn btn-primary"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                <i class="fa fa-cart-arrow-down"></i>
+                Giỏ Hàng
+              </button>
+            </div>
           </div>
+
           <tbody>
             <div
               id="bodySP"
@@ -104,25 +107,57 @@
           </tbody>
         </div>
         <!-- tag Giỏ Hàng -->
-        <div
-          class="tab-pane fade show"
-          id="danhsachgiohang"
-          role="tabpanel"
-          aria-labelledby="nav-home-tab1"
-        >
-          <div class="tblGioHang" id="tblGioHang">
-            <!-- BEGIN TABLE SẢN PHẨM -->
-            <table class="table table-bordered">
-              <thead>
-                <th>STT</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Giá</th>
-                <th>Số Lượng</th>
-                <th>Thành Tiền</th>
-              </thead>
-              <tbody id="tblDanhGioHang"></tbody>
-            </table>
-            <!-- END TABLE SẢN PHẨM -->
+      </div>
+      <!-- Modal giỏ hàng-->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        style="background-color: transparent"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header d-block">
+              <h5
+                class="modal-title"
+                style="text-align: center"
+                id="exampleModalLabel"
+              >
+                DANH SÁCH GIỎ HÀNG
+              </h5>
+            </div>
+            <div class="modal-body">
+              <table class="table table-bordered">
+                <thead>
+                  <th>STT</th>
+                  <th>Tên Sản Phẩm</th>
+                  <th>Giá</th>
+                  <th>Số Lượng</th>
+                  <th>Thành Tiền</th>
+                  <th>Tùy Chọn</th>
+                </thead>
+                <tbody id="tblDanhGioHang12"></tbody>
+                <th colspan="4" style="text-align: center">
+                  Tổng tiền thanh toán
+                </th>
+                <th id="tongtienthanhtoan"></th>
+                <td></td>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Đóng
+              </button>
+              <button type="button" class="btn btn-primary">
+                Thanh Toán Tất Cả
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -215,6 +250,6 @@
 
     <script src="./app/models/Sanpham.js"></script>
     <script src="./app/services/SanPhamList.js"></script>
-    <script src="./app/controllers/main.js"></script>
+    <script src="./app/controllers/mainUser.js"></script>
   </body>
 </html>

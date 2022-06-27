@@ -18,6 +18,29 @@ header {
   margin-bottom: 20px;
 }
 
+.products .buttoncart {
+  border: 0;
+  background: #07b7ec;
+  background: linear-gradient(24deg, rgba(7, 236, 95, 0.493) 0%, #197909 50%, rgba(153, 255, 0, 0.823) 90%);
+  border-radius: 10px;
+  height: 35px;
+}
+
+.products .modal-dialog {
+  max-width: 800px;
+}
+
+.products .modal-dialog .modal-content {
+  border-radius: 30px;
+  background-color: rgba(49, 222, 222, 0.8);
+  margin: 0 auto;
+  width: 800px;
+}
+
+.products .modal-dialog .modal-content .modal-footer button {
+  border-radius: 15px;
+}
+
 .products .row .card {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -65,7 +88,7 @@ header {
 }
 
 .products .row .card .card-body h1 {
-  font-size: 11px;
+  font-size: 15px;
   color: palevioletred;
   font-weight: 600;
 }
