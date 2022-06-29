@@ -51,7 +51,8 @@ let themSP = () => {
   let RAM = ELE("#dungluongRAM").value;
   let anh = ELE("#HinhSP").value;
   let moTa = ELE("#MoTa").value;
-  let sp = new SanPham(ten, loai, gia, ROM, RAM, anh, moTa);
+  let soLuong = ELE("#soluong").value;
+  let sp = new SanPham(ten, loai, gia, ROM, RAM, anh, moTa, soLuong);
 
   const promise = services.post(sp);
   promise.then((resutl) => {
@@ -122,6 +123,26 @@ let xemChiTiet = (id) => {
     ELE("#HinhSP").value = result.data.anhSP;
     ELE("#MoTa").value = result.data.moTaSP;
     ELE("#myModal .modal-footer").innerHTML = `
-    <button id="capnhap" class="btn btn-primary">Cập nhập</button></div>`;
+    <button id="capnhap" onclick="capNhapSP(${result.data.id})" class="btn btn-primary">Cập nhập</button></div>`;
   });
+};
+// cập nhập sp
+let capNhapSP = (id) => {
+  let ten = ELE("#TenSP").value;
+  let loai = ELE("#loai").value;
+  let gia = ELE("#GiaSP").value;
+  let ROM = ELE("#dungluongROM").value;
+  let RAM = ELE("#dungluongRAM").value;
+  let anh = ELE("#HinhSP").value;
+  let moTa = ELE("#MoTa").value;
+  let sp = new SanPham(ten, loai, gia, ROM, RAM, anh, moTa);
+  let promise = services.capNhap(id, sp);
+  promise
+    .then((result) => {
+      console.log(result);
+      getProductList();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };

@@ -105,7 +105,7 @@ let addUICart = (ten, gia) => {
             <td>${sp.tenSP}</td>
             <td>${sp.giaSP}</td>
             <td>
-                <input id="abc" style="width: 30px" type="number" value="1" min="0"/>
+                <input id="soLuong" style="width: 30px" type="number" value="1" min="0"/>
             </td>
             <td>thành tiền</td>
             <td>

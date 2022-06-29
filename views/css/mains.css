@@ -72,12 +72,12 @@ header {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -o-object-fit: cover;
-     object-fit: cover;
   width: 100%;
-  height: 380px;
+  height: 300px;
   -ms-flex-negative: 0;
       flex-shrink: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .products .row .card .card-top img {
