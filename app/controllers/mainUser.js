@@ -117,8 +117,10 @@ let addUICart = (ten, gia) => {
   document.getElementById("tblDanhGioHang12").innerHTML = content;
 };
 
-// tìm kiếm điện thoại
-ELE("#findSP").addEventListener("click", () => {
+
+// tìm kiếm sản phẩm
+
+let searchSp = () => {
   let tenSp = ELE("#txtFind").value;
   let mangSp = [];
   let tenThuong = tenSp.toLowerCase();
@@ -128,6 +130,17 @@ ELE("#findSP").addEventListener("click", () => {
       mangSp.push(item);
     }
   })
-  HienThiSPUser(mangSp)
-});
+  return mangSp;
+}
 
+
+ELE("#findSP").onclick = () => {
+  let  mangdt = searchSp(); 
+  HienThiSPUser(mangdt)
+}
+
+
+ELE("#txtFind").onkeyup = () => {
+  let mangdt = searchSp(); 
+  HienThiSPUser(mangdt)
+}

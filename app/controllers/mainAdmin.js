@@ -146,3 +146,30 @@ let capNhapSP = (id) => {
       console.log(error);
     });
 };
+
+// tìm kiếm sản phẩm
+
+let searchSp = () => {
+  let tenSp = ELE("#txtFind").value;
+  let mangSp = [];
+  let tenThuong = tenSp.toLowerCase();
+  arrPhone.map((item) => {
+    let tenSpThuong = item.tenSP.toLowerCase();
+    if(tenSpThuong.indexOf(tenThuong) > -1) {
+      mangSp.push(item);
+    }
+  })
+  return mangSp;
+}
+
+
+ELE("#findSP").onclick = () => {
+  let  mangdt = searchSp(); 
+  HienThiSPUser(mangdt)
+}
+
+
+ELE("#txtFind").onkeyup = () => {
+  let mangdt = searchSp(); 
+  HienThiSPUser(mangdt)
+}
