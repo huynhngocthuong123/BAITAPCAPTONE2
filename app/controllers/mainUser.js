@@ -8,7 +8,7 @@ let getProductList = () => {
     // console.log(resutl)
     arrPhone = resutl.data;
     HienThiSPUser(arrPhone);
-    HienThiSPAdmin(arrPhone);
+    // HienThiSPAdmin(arrPhone);
   });
   promise.catch((error) => {
     console.log(error);
@@ -30,7 +30,7 @@ let HienThiSPUser = (mangSP) => {
             <h1><span>${sp.tenSP}</span></h1>
             <p>${sp.moTaSP}</p>
             </div>
-          <h5>Giá sản phẩm: ${sp.giaSP}</h5>
+            <h5>Giá sản phẩm: ${sp.giaSP}</h5>
           </div>
         </div>
         <div class="card-hover d-flex justify-content-around">
@@ -116,3 +116,18 @@ let addUICart = (ten, gia) => {
   });
   document.getElementById("tblDanhGioHang12").innerHTML = content;
 };
+
+// tìm kiếm điện thoại
+ELE("#findSP").addEventListener("click", () => {
+  let tenSp = ELE("#txtFind").value;
+  let mangSp = [];
+  let tenThuong = tenSp.toLowerCase();
+  arrPhone.map((item) => {
+    let tenSpThuong = item.tenSP.toLowerCase();
+    if(tenSpThuong.indexOf(tenThuong) > -1) {
+      mangSp.push(item);
+    }
+  })
+  HienThiSPUser(mangSp)
+});
+
