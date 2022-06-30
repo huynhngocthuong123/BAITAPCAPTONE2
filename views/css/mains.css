@@ -155,4 +155,9 @@ header {
   -webkit-transform: translateY(-20px);
           transform: translateY(-20px);
 }
+
+.input-group-append {
+  border-color: white;
+}
+
 /*# sourceMappingURL=mains.css.map */

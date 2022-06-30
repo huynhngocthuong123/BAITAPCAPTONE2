@@ -1,13 +1,5 @@
-function SanPham(
-  ten,
-  loai,
-  gia,
-  dungLuongROM,
-  dungLuongRAM,
-  anh,
-  moTa,
-  soLuong
-) {
+function SanPham(ten,loai,gia,dungLuongROM,dungLuongRAM,anh,
+moTa,soLuong) {
   this.tenSP = ten;
   this.loaiSP = loai;
   this.giaSP = gia;
