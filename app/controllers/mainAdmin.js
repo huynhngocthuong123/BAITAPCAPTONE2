@@ -1,4 +1,5 @@
 const services = new DanhSachSanPham();
+const validation = new Validation();
 let arrPhone = [];
 
 let getProductList = () => {
@@ -28,7 +29,6 @@ let HienThiSPUser = (mangSP) => {
     <td>
     <button class="btn btn-info xemchitiet" data-toggle="modal" data-target="#myModal"
         onclick = "xemChiTiet('${sp.id}')">chi tiết</button>
-        
         <button onclick="deleteProduct('${
           sp.id
         }')" class="btn btn-danger">xóa</button>
@@ -51,23 +51,46 @@ let themSP = () => {
   let RAM = ELE("#dungluongRAM").value;
   let anh = ELE("#HinhSP").value;
   let moTa = ELE("#MoTa").value;
-  let soLuong = ELE("#soluong").value;
-  let sp = new SanPham(ten, loai, gia, ROM, RAM, anh, moTa, soLuong);
+  // let soLuong = ELE("#soluong").value;
 
-  const promise = services.post(sp);
-  promise.then((resutl) => {
-    console.log(resutl);
-    getProductList();
-  });
-  promise.catch((error) => {
-    console.log(error);
-  });
+  let isValid = true;
+
+  isValid &= validation.kiemtraRong(ten,"spanTenSP","Tên sản phẩm không được để trống")
+  // Kiểm tra loại điện thoại
+  isValid &= validation.kiemTraLoaiSP("loai","spanLoaiSP","Chưa chọn loại điện thoại")
+  // Kiểm tra giá
+  isValid &= validation.kiemTraGia(gia,"spanGiaSP","Giá không hợp lệ")
+  // Kiểm tra ROm and RAM
+  isValid &= validation.kiemTraRom(ROM,"spanDungLuongROM","Dung lượng không hợp lệ");
+  isValid &= validation.kiemTraRom(RAM,"spanDungLuongRAM","Dung lượng không hợp lệ")
+
+  // Kiểm tra ảnh
+  isValid &= validation.kiemtraRong(anh,"spanHinhAnh","Vui lòng điền link ảnh");
+
+  isValid &= validation.kiemtraRong(moTa,"spanMoTaSP","Vui lòng nhập mô tả")
+
+  if(isValid) {
+    let sp = new SanPham(ten, loai, gia, ROM, RAM, anh, moTa);
+    // console.log(ten,loai,gia,ROM,RAM,anh,moTa)
+    const promise = services.post(sp);
+    promise.then((resutl) => {
+      console.log(resutl);
+      getProductList();
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
+  // console.log(isValid)
 };
 ELE("#btnThemMoiSP").addEventListener("click", function () {
   ELE(
     "#myModal .modal-footer"
   ).innerHTML = `<button class=" btn btn-success ml-auto px-5" onclick="themSP()">Thêm</button>`;
 });
+
+
+
 // xóa sp
 let deleteProduct = (id) => {
   const promise = services.delete(id);
