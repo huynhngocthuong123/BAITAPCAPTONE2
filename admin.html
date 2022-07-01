@@ -149,6 +149,7 @@
                   class="form-control"
                   placeholder="Nhập vào tên sản phẩm"
                 />
+                <span id="spanTenSP" class="text-danger"></span>
               </div>
               <div class="form-group">
                 <label>Loại Sản Phẩm</label>
@@ -157,6 +158,7 @@
                   <option value="iphone">Iphone</option>
                   <option value="samsung">SamSung</option>
                 </select>
+                <span id="spanLoaiSP" class="text-danger"></span>
               </div>
               <div class="form-group">
                 <label>Giá</label>
@@ -165,6 +167,7 @@
                   class="form-control"
                   placeholder="Nhập vào giá"
                 />
+                <span id="spanGiaSP" class="text-danger"></span>
               </div>
               <div class="form-group">
                 <label>Dung lượng bộ nhớ trong (ROM)</label>
@@ -174,6 +177,7 @@
                   class="form-control"
                   placeholder="Nhập dung lượng bộ nhớ"
                 />
+                <span id="spanDungLuongROM" class="text-danger"></span>
               </div>
               <div class="form-group">
                 <label>Dung lượng bộ nhớ xử lý (RAM)</label>
@@ -183,6 +187,7 @@
                   class="form-control"
                   placeholder="Nhập dung lượng bộ nhớ"
                 />
+                <span id="spanDungLuongRAM" class="text-danger"></span>
               </div>
               <div class="form-group">
                 <label>Hình Ảnh</label>
@@ -191,10 +196,12 @@
                   class="form-control"
                   placeholder="Nhập vào hình sản phẩm"
                 />
+                <span id="spanHinhAnh" class="text-danger"></span>
               </div>
               <div class="form-group">
                 <label for="">Mô tả Chức năng: </label>
                 <textarea id="MoTa" class="form-control"></textarea>
+                <span id="spanMoTaSP" class="text-danger"></span>
               </div>
             </div>
             <div class="modal-footer justify-content-between"></div>
@@ -216,6 +223,7 @@
     <!-- aixos -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <script src="./app/services/validation.js"></script>
     <script src="./app/models/Sanpham.js"></script>
     <script src="./app/services/SanPhamList.js"></script>
     <script src="./app/controllers/mainAdmin.js"></script>
