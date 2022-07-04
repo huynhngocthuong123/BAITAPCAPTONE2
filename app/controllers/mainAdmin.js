@@ -24,7 +24,7 @@ let HienThiSPUser = (mangSP) => {
     <td>${++stt}</td>
     <td>${sp.tenSP}</td>
     <td>${sp.dungLuongROM}</td>
-    <td>${sp.giaSP}</td>
+    <td>${sp.giaSP}$</td>
     <td>${sp.moTaSP}</td>
     <td>
     <button class="btn btn-info xemchitiet" data-toggle="modal" data-target="#myModal"
@@ -55,31 +55,52 @@ let themSP = () => {
 
   let isValid = true;
 
-  isValid &= validation.kiemtraRong(ten,"spanTenSP","Tên sản phẩm không được để trống")
+  isValid &= validation.kiemtraRong(
+    ten,
+    "spanTenSP",
+    "Tên sản phẩm không được để trống"
+  );
   // Kiểm tra loại điện thoại
-  isValid &= validation.kiemTraLoaiSP("loai","spanLoaiSP","Chưa chọn loại điện thoại")
+  isValid &= validation.kiemTraLoaiSP(
+    "loai",
+    "spanLoaiSP",
+    "Chưa chọn loại điện thoại"
+  );
   // Kiểm tra giá
-  isValid &= validation.kiemTraGia(gia,"spanGiaSP","Giá không hợp lệ")
+  isValid &= validation.kiemTraGia(gia, "spanGiaSP", "Giá không hợp lệ");
   // Kiểm tra ROm and RAM
-  isValid &= validation.kiemTraRom(ROM,"spanDungLuongROM","Dung lượng không hợp lệ");
-  isValid &= validation.kiemTraRom(RAM,"spanDungLuongRAM","Dung lượng không hợp lệ")
+  isValid &= validation.kiemTraRom(
+    ROM,
+    "spanDungLuongROM",
+    "Dung lượng không hợp lệ"
+  );
+  isValid &= validation.kiemTraRom(
+    RAM,
+    "spanDungLuongRAM",
+    "Dung lượng không hợp lệ"
+  );
 
   // Kiểm tra ảnh
-  isValid &= validation.kiemtraRong(anh,"spanHinhAnh","Vui lòng điền link ảnh");
+  isValid &= validation.kiemtraRong(
+    anh,
+    "spanHinhAnh",
+    "Vui lòng điền link ảnh"
+  );
 
-  isValid &= validation.kiemtraRong(moTa,"spanMoTaSP","Vui lòng nhập mô tả")
+  isValid &= validation.kiemtraRong(moTa, "spanMoTaSP", "Vui lòng nhập mô tả");
 
-  if(isValid) {
+  if (isValid) {
     let sp = new SanPham(ten, loai, gia, ROM, RAM, anh, moTa);
     // console.log(ten,loai,gia,ROM,RAM,anh,moTa)
     const promise = services.post(sp);
-    promise.then((resutl) => {
-      console.log(resutl);
-      getProductList();
-    })
-    .catch((error)=>{
-      console.log(error)
-    })
+    promise
+      .then((resutl) => {
+        console.log(resutl);
+        getProductList();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   // console.log(isValid)
 };
@@ -88,8 +109,6 @@ ELE("#btnThemMoiSP").addEventListener("click", function () {
     "#myModal .modal-footer"
   ).innerHTML = `<button class=" btn btn-success ml-auto px-5" onclick="themSP()">Thêm</button>`;
 });
-
-
 
 // xóa sp
 let deleteProduct = (id) => {
@@ -178,21 +197,19 @@ let searchSp = () => {
   let tenThuong = tenSp.toLowerCase();
   arrPhone.map((item) => {
     let tenSpThuong = item.tenSP.toLowerCase();
-    if(tenSpThuong.indexOf(tenThuong) > -1) {
+    if (tenSpThuong.indexOf(tenThuong) > -1) {
       mangSp.push(item);
     }
-  })
+  });
   return mangSp;
-}
-
+};
 
 ELE("#findSP").onclick = () => {
-  let  mangdt = searchSp(); 
-  HienThiSPUser(mangdt)
-}
-
+  let mangdt = searchSp();
+  HienThiSPUser(mangdt);
+};
 
 ELE("#txtFind").onkeyup = () => {
-  let mangdt = searchSp(); 
-  HienThiSPUser(mangdt)
-}
+  let mangdt = searchSp();
+  HienThiSPUser(mangdt);
+};

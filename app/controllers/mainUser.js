@@ -14,6 +14,12 @@ let getProductList = () => {
     console.log(error);
   });
 };
+// lưu localstorage mảng addCart giỏ hàng
+let GetLocalStorage = () => {
+  localStorage.setItem("DSGH", ad);
+};
+// GetLocalStorage();
+// GetLocalStorage();
 getProductList();
 // hiển thị sản phẩm
 let HienThiSPUser = (mangSP) => {
@@ -30,7 +36,7 @@ let HienThiSPUser = (mangSP) => {
             <h1><span>${sp.tenSP}</span></h1>
             <p>${sp.moTaSP}</p>
             </div>
-            <h5>Giá sản phẩm: ${sp.giaSP}</h5>
+            <h5>Giá sản phẩm: ${sp.giaSP}$</h5>
           </div>
         </div>
         <div class="card-hover d-flex justify-content-around">
@@ -95,10 +101,15 @@ let addUICart = (ten, gia) => {
   addCart.push({
     tenSP: ten,
     giaSP: gia,
+    soLuong: 1,
   });
   let content = "";
   let stt = 0;
+  let thanhTien = 0;
+  let tongThanhTien = 0;
   addCart.map(function (sp) {
+    thanhTien = sp.soLuong * sp.giaSP;
+    tongThanhTien += thanhTien;
     content += `
         <tr>
         <td>${++stt}</td>
@@ -107,16 +118,17 @@ let addUICart = (ten, gia) => {
             <td>
                 <input id="soLuong" style="width: 30px" type="number" value="1" min="0"/>
             </td>
-            <td>thành tiền</td>
+            <td>${thanhTien}</td>
             <td>
                 <button class="btn btn-danger">Xóa</button>
             </td>
         </tr>
         `;
   });
+  console.log("Tổng thành tiền", tongThanhTien);
+  document.querySelector("#tongtienthanhtoan").innerHTML = tongThanhTien;
   document.getElementById("tblDanhGioHang12").innerHTML = content;
 };
-
 
 // tìm kiếm sản phẩm
 
@@ -126,21 +138,19 @@ let searchSp = () => {
   let tenThuong = tenSp.toLowerCase();
   arrPhone.map((item) => {
     let tenSpThuong = item.tenSP.toLowerCase();
-    if(tenSpThuong.indexOf(tenThuong) > -1) {
+    if (tenSpThuong.indexOf(tenThuong) > -1) {
       mangSp.push(item);
     }
-  })
+  });
   return mangSp;
-}
-
+};
 
 ELE("#findSP").onclick = () => {
-  let  mangdt = searchSp(); 
-  HienThiSPUser(mangdt)
-}
-
+  let mangdt = searchSp();
+  HienThiSPUser(mangdt);
+};
 
 ELE("#txtFind").onkeyup = () => {
-  let mangdt = searchSp(); 
-  HienThiSPUser(mangdt)
-}
+  let mangdt = searchSp();
+  HienThiSPUser(mangdt);
+};
