@@ -79,7 +79,7 @@
                   aria-label="Recipient's username"
                   aria-describedby="basic-addon2"
                 />
-                <button class="input-group-append">
+                <button class="input-group-append" style="border: 0">
                   <span class="input-group-text bg-info buttoncart" id="findSP"
                     ><i class="fa fa-search"></i
                   ></span>
@@ -92,7 +92,7 @@
                 type="button"
                 class="buttoncart btn btn-primary"
                 data-toggle="modal"
-                data-target="#exampleModal"
+                data-target="#exampleModal1"
               >
                 <i class="fa fa-cart-arrow-down"></i>
                 Giỏ Hàng
@@ -112,13 +112,13 @@
       <!-- Modal giỏ hàng-->
       <div
         class="modal fade"
-        id="exampleModal"
+        id="exampleModal1"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
         style="background-color: transparent"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-cart">
           <div class="modal-content">
             <div class="modal-header d-block">
               <h5
@@ -152,10 +152,16 @@
                 type="button"
                 class="btn btn-secondary"
                 data-dismiss="modal"
+                aria-label="Close"
               >
                 Đóng
               </button>
-              <button type="button" class="btn btn-primary">
+              <button
+                id="thanhToanAll"
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+              >
                 Thanh Toán Tất Cả
               </button>
             </div>
@@ -235,6 +241,7 @@
         </div>
       </div>
     </section>
+
     <footer>
       <h1 class="bg-info text-center py-5 mt-5">
         CẢM ƠN QUÝ KHÁCH HÀNG ĐÃ TIN DÙNG

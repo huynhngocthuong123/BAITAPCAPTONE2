@@ -15,11 +15,7 @@ let getProductList = () => {
   });
 };
 // lưu localstorage mảng addCart giỏ hàng
-let GetLocalStorage = () => {
-  localStorage.setItem("DSGH", ad);
-};
-// GetLocalStorage();
-// GetLocalStorage();
+
 getProductList();
 // hiển thị sản phẩm
 let HienThiSPUser = (mangSP) => {
@@ -42,7 +38,7 @@ let HienThiSPUser = (mangSP) => {
         <div class="card-hover d-flex justify-content-around">
         <button class="buttoncart btn btn-info xemchitiet" data-toggle="modal" data-target="#myModal"
         onclick = "xemChiTiet('${sp.id}')">Chi tiết</button>
-        <button onclick="addUICart('${sp.tenSP}','${sp.giaSP}')" class="buttoncart btn btn-success">Thêm giỏ hàng</button>
+        <button onclick="addUICart('${sp.tenSP}','${sp.giaSP}','${sp.id}')" class="buttoncart btn btn-success">Thêm giỏ hàng</button>
       </div>
       </div>`;
   });
@@ -81,11 +77,11 @@ ELE("#chonthuonghieu").addEventListener("change", () => {
 });
 
 let xemChiTiet = (id) => {
-  console.log(id);
+  // console.log(id);
   const promise = services.getProductItem(id);
 
   promise.then((result) => {
-    console.log(result);
+    // console.log(result);
     ELE("#TenSP").value = result.data.tenSP;
     ELE("#loai").value = result.data.loaiSP;
     ELE("#GiaSP").value = result.data.giaSP;
@@ -96,13 +92,21 @@ let xemChiTiet = (id) => {
   });
 };
 // thêm vào giỏ hàng chưa code local storage
+
+//  click thêm vào giỏ hàng
 let addCart = [];
-let addUICart = (ten, gia) => {
+let addUICart = (ten, gia, id) => {
+  // console.log(ten, gia, id);
   addCart.push({
     tenSP: ten,
     giaSP: gia,
     soLuong: 1,
+    id: id,
   });
+  hienThiCart();
+};
+//  UI giỏ hàng
+let hienThiCart = () => {
   let content = "";
   let stt = 0;
   let thanhTien = 0;
@@ -112,26 +116,99 @@ let addUICart = (ten, gia) => {
     tongThanhTien += thanhTien;
     content += `
         <tr>
-        <td>${++stt}</td>
+            <td>${++stt}</td>
             <td>${sp.tenSP}</td>
-            <td>${sp.giaSP}</td>
+            <td>${sp.giaSP}$</td>
             <td>
-                <input id="soLuong" style="width: 30px" type="number" value="1" min="0"/>
+                <span onclick="upDown('down',${
+                  sp.id
+                })" type="button" class="btn_updown">-</span>
+                <span>${sp.soLuong}</span>
+                <span onclick="upDown('up',${
+                  sp.id
+                })" type="button" class="btn_updown">+</span>
             </td>
-            <td>${thanhTien}</td>
+            <td>${thanhTien}$</td>
             <td>
-                <button class="btn btn-danger">Xóa</button>
+                <button  class="btn btn-danger"
+                type="button"
+                data-toggle="modal"
+                data-target="#exampleModal2">Xóa</button>
             </td>
+            <div
+            class="modal fade"
+            id="exampleModal2"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-clear">
+              <div class="modal-content clear">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    BẠN THẬT SỰ MUỐN XÓA
+                  </h5>
+                </div>
+                <div class="modal-footer clear">
+                  <button
+                    onclick = "deleteSPCart('${sp.id}')"
+                    type="button"
+                    class="btn btn-success d-flex align-items-center"
+                    data-dismiss="modal"
+                  >
+                    <span>Confirm</span>
+                    <ion-icon
+                      class="icon1 ml-2"
+                      name="checkmark-circle-sharp"
+                    ></ion-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </tr>
         `;
+    return tongThanhTien;
   });
-  console.log("Tổng thành tiền", tongThanhTien);
-  document.querySelector("#tongtienthanhtoan").innerHTML = tongThanhTien;
+  document.querySelector("#tongtienthanhtoan").innerHTML = `${tongThanhTien}$`;
   document.getElementById("tblDanhGioHang12").innerHTML = content;
+  return tongThanhTien;
 };
-
+// thông báo thanh toán tất cả sản phẩm
+document.querySelector("#thanhToanAll").addEventListener("click", () => {
+  let tongThanhTien = 0;
+  tongThanhTien = hienThiCart();
+  alert(
+    `QUÝ KHÁCH ĐÃ THANH TOÁN THÀNH GIỎ HÀNG
+    TỔNG ĐƠN HÀNG : ${tongThanhTien}$`
+  );
+});
+// tăng giảm số lượng
+let upDown = (name, id) => {
+  addCart.map((sp) => {
+    if (sp.id == id) {
+      if (name === "down" && sp.soLuong < 1) {
+        alert("số lượng không thể nhỏ hơn 0");
+      } else if (name === "down") {
+        sp.soLuong--;
+      } else {
+        sp.soLuong++;
+      }
+    }
+    hienThiCart();
+  });
+};
+// xóa sản phẩm khỏi giỏ hàng
+let deleteSPCart = (id) => {
+  console.log(id);
+  for (let i = 0; i < addCart.length; i++) {
+    if (addCart[i].id == id) {
+      addCart.splice(i, 1);
+      hienThiCart();
+    }
+  }
+};
 // tìm kiếm sản phẩm
-
 let searchSp = () => {
   let tenSp = ELE("#txtFind").value;
   let mangSp = [];
@@ -144,7 +221,6 @@ let searchSp = () => {
   });
   return mangSp;
 };
-
 ELE("#findSP").onclick = () => {
   let mangdt = searchSp();
   HienThiSPUser(mangdt);

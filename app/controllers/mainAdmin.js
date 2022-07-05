@@ -97,6 +97,7 @@ let themSP = () => {
       .then((resutl) => {
         console.log(resutl);
         getProductList();
+        document.querySelector("#myModal .close").click();
       })
       .catch((error) => {
         console.log(error);
@@ -183,6 +184,7 @@ let capNhapSP = (id) => {
     .then((result) => {
       console.log(result);
       getProductList();
+      document.querySelector("#myModal .close").click();
     })
     .catch((error) => {
       console.log(error);
