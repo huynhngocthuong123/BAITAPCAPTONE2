@@ -32,26 +32,6 @@
             }
         
     }
-    // xác nhận xóa
-    .modal-clear {
-        max-width: 400px;
-        border-radius: 30px;
-      
-        background-color: rgba(49, 222, 222, 1);
-        .modal-content {
-          border-radius: 30px;
-          background: rgba(49, 222, 222, 0.281);
-          margin: 0 auto;
-          width: 400px;
-          .clear .icon1 {
-            color: greenyellow;
-          }
-          .clear .icon2 {
-            color: blue;
-          }
-        }
-      }
-    
     .row {
         .card {
             display: flex;
