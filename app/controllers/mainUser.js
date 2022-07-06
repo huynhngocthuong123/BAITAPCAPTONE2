@@ -130,10 +130,11 @@ let hienThiCart = () => {
             </td>
             <td>${thanhTien}$</td>
             <td>
-                <button  class="btn btn-danger"
+                <button onclick = "deleteSPCart('${
+                  sp.id
+                }')"  class="btn btn-danger"
                 type="button"
-                data-toggle="modal"
-                data-target="#exampleModal2">Xóa</button>
+                >Xóa</button>
             </td>
             <div
             class="modal fade"
@@ -151,7 +152,7 @@ let hienThiCart = () => {
                 </div>
                 <div class="modal-footer clear">
                   <button
-                    onclick = "deleteSPCart('${sp.id}')"
+                    
                     type="button"
                     class="btn btn-success d-flex align-items-center"
                     data-dismiss="modal"
@@ -183,6 +184,11 @@ document.querySelector("#thanhToanAll").addEventListener("click", () => {
     TỔNG ĐƠN HÀNG : ${tongThanhTien}$`
   );
 });
+document.querySelector("#xoaAll").addEventListener("click", () => {
+  addCart = [];
+  confirm("BẠN THẬT SỰ MUỐN XÓA TẤT CẢ?");
+  hienThiCart();
+});
 // tăng giảm số lượng
 let upDown = (name, id) => {
   addCart.map((sp) => {
@@ -201,11 +207,15 @@ let upDown = (name, id) => {
 // xóa sản phẩm khỏi giỏ hàng
 let deleteSPCart = (id) => {
   console.log(id);
+  console.log(addCart);
   for (let i = 0; i < addCart.length; i++) {
     if (addCart[i].id == id) {
+      confirm("BẠN THẬT SỰ MUỐN XÓA?");
       addCart.splice(i, 1);
-      hienThiCart();
+
+      // console.log(addCart[i].id);
     }
+    hienThiCart();
   }
 };
 // tìm kiếm sản phẩm
