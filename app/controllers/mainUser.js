@@ -14,7 +14,7 @@ let getProductList = () => {
     console.log(error);
   });
 };
-// lưu localstorage mảng addCart giỏ hàng
+
 
 getProductList();
 // hiển thị sản phẩm
@@ -91,18 +91,24 @@ let xemChiTiet = (id) => {
     ELE("#MoTa").value = result.data.moTaSP;
   });
 };
-// thêm vào giỏ hàng chưa code local storage
 
-//  click thêm vào giỏ hàng
+// lưu localstorage mảng addCart giỏ hàng
 let addCart = [];
-let addUICart = (ten, gia, id) => {
+let setLocalStorage = () => {
+  localStorage.setItem("addCart", JSON.stringify(addCart));
+}
+
+let addUICart = (ten, gia, id) => { 
   // console.log(ten, gia, id);
+  // getLocalStorage();
   addCart.push({
     tenSP: ten,
     giaSP: gia,
     soLuong: 1,
     id: id,
   });
+  //  lưu addCart vào localStorage
+  setLocalStorage()
   hienThiCart();
 };
 //  UI giỏ hàng
@@ -122,7 +128,7 @@ let hienThiCart = () => {
             <td>
                 <span onclick="upDown('down',${
                   sp.id
-                })" type="button" class="btn_updown">-</span>
+                })" type="button" id="downn" class="btn_updown">-</span>
                 <span>${sp.soLuong}</span>
                 <span onclick="upDown('up',${
                   sp.id
@@ -174,6 +180,8 @@ let hienThiCart = () => {
   document.getElementById("tblDanhGioHang12").innerHTML = content;
   return tongThanhTien;
 };
+
+
 // thông báo thanh toán tất cả sản phẩm
 document.querySelector("#thanhToanAll").addEventListener("click", () => {
   let tongThanhTien = 0;
@@ -187,14 +195,17 @@ document.querySelector("#thanhToanAll").addEventListener("click", () => {
 let upDown = (name, id) => {
   addCart.map((sp) => {
     if (sp.id == id) {
-      if (name === "down" && sp.soLuong < 1) {
+      if (name === "down" && sp.soLuong == 1) {
         alert("số lượng không thể nhỏ hơn 0");
+        ELE("#downn").style.visibility = "hidden";
+        // deleteSPCart(id);
       } else if (name === "down") {
         sp.soLuong--;
       } else {
         sp.soLuong++;
       }
     }
+    setLocalStorage()
     hienThiCart();
   });
 };
@@ -204,6 +215,7 @@ let deleteSPCart = (id) => {
   for (let i = 0; i < addCart.length; i++) {
     if (addCart[i].id == id) {
       addCart.splice(i, 1);
+      setLocalStorage()
       hienThiCart();
     }
   }
@@ -230,3 +242,13 @@ ELE("#txtFind").onkeyup = () => {
   let mangdt = searchSp();
   HienThiSPUser(mangdt);
 };
+
+
+let getLocalStorage = () => {
+  if (localStorage.getItem("addCart") != null) {
+    addCart = JSON.parse(localStorage.getItem("addCart"));
+    hienThiCart()
+  }
+}
+// hiển thị khi load lại trang web
+getLocalStorage();
