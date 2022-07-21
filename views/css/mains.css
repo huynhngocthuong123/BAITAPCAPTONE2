@@ -53,27 +53,6 @@ header {
   border-radius: 15px;
 }
 
-.products .modal-clear {
-  max-width: 400px;
-  border-radius: 30px;
-  background-color: #31dede;
-}
-
-.products .modal-clear .modal-content {
-  border-radius: 30px;
-  background: rgba(49, 222, 222, 0.281);
-  margin: 0 auto;
-  width: 400px;
-}
-
-.products .modal-clear .modal-content .clear .icon1 {
-  color: greenyellow;
-}
-
-.products .modal-clear .modal-content .clear .icon2 {
-  color: blue;
-}
-
 .products .row .card {
   display: -webkit-box;
   display: -ms-flexbox;
